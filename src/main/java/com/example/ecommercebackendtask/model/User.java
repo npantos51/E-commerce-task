@@ -4,14 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
+@Getter
+@Setter
 @Table(name = "users", schema = "shop")
 public class User {
 
@@ -19,9 +19,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "name field cannot be NULL")
+    @NotNull(message = "username field cannot be NULL")
     @Size(max = 50, message = "The input is too long")
-    private String name;
+    private String username;
 
     @NotNull(message = "email field cannot be NULL")
     @Size(max = 50, message = "The input is too long")
