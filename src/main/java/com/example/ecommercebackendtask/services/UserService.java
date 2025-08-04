@@ -2,6 +2,7 @@ package com.example.ecommercebackendtask.services;
 
 import com.example.ecommercebackendtask.model.User;
 import com.example.ecommercebackendtask.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
