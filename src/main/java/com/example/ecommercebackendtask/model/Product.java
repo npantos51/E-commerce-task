@@ -1,6 +1,7 @@
 package com.example.ecommercebackendtask.model;
 
 import com.example.ecommercebackendtask.util.Converter;
+import com.example.ecommercebackendtask.util.JsonReaderClass;
 import jakarta.persistence.*;
 import jakarta.validation.Constraint;
 import jakarta.validation.constraints.NotNull;
@@ -22,11 +23,11 @@ public class Product {
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotNull(message = "name field cannot be NULL")
+    @NotNull(message = "name field cannot be NULL")
     @Size(max = 200, message = "The input is too long")
     private String name;
 
-//    @NotNull(message = "price field cannot be NULL")
+    @NotNull(message = "price field cannot be NULL")
     private Double price;
 
     @Size(max = 1000, message = "The input is too long")
@@ -35,6 +36,8 @@ public class Product {
     @Size(max = 2000, message = "The input is too long")
     private String fullDescription;
 
+//    @Convert(converter = JsonReaderClass.class)
+//    @Column(columnDefinition = "JSON CHARACTER SET utf8mb4")
     @ElementCollection
     private List<String> images;
 

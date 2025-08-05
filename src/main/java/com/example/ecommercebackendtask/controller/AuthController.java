@@ -2,8 +2,15 @@ package com.example.ecommercebackendtask.controller;
 
 
 import com.example.ecommercebackendtask.filters.JWTUtil;
+import com.example.ecommercebackendtask.model.User;
 import com.example.ecommercebackendtask.requests.LoginRequest;
+import com.example.ecommercebackendtask.requests.RegisterRequest;
+import com.example.ecommercebackendtask.responses.AuthResponse;
 import com.example.ecommercebackendtask.services.UserService;
+import io.swagger.models.Response;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,18 +19,25 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/auth")
+@RequiredArgsConstructor
+@RequestMapping("/api/auth")
 public class AuthController {
 
-//    private final AuthenticationManager authenticationManager;
-//    private final UserService userService;
-//    private final JWTUtil jwtUtil;
-//
-//    public AuthController(AuthenticationManager authenticationManager, UserService userService, JWTUtil jwtUtil) {
-//        this.authenticationManager = authenticationManager;
-//        this.userService = userService;
-//        this.jwtUtil = jwtUtil;
-//    }
+    private final UserService userService;
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request){
+        return ResponseEntity.ok(userService.login(request));
+    }
+
+
+
+
 //
 //    @PostMapping(value = "/login",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<?> login (@RequestBody LoginRequest loginRequest) {
