@@ -11,7 +11,10 @@ import com.example.ecommercebackendtask.requests.RegisterRequest;
 import com.example.ecommercebackendtask.responses.AuthResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +37,7 @@ public class UserService {
     private final CartRepository cartRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTUtil jwtUtil;
+//    private final AuthenticationManager authenticationManager;
 
 
     public AuthResponse register(RegisterRequest request){
@@ -59,6 +63,7 @@ public class UserService {
     }
 
     public AuthResponse login(LoginRequest request){
+
         User user = userRepository.findByUsername(request.getUsername());
         if(user == null){
             throw new UsernameNotFoundException("User not found");
@@ -79,12 +84,17 @@ public class UserService {
         return userRepository.findAll();
 
     }
+    public Optional<User> getUserById(Long id) {
+
+        return userRepository.findById(id);
+    }
+    public void delete(Long id){
+        userRepository.deleteById(id);
+    }
 
     public User getUserByEmail(String email) {
+
         return userRepository.findByEmail(email);
     }
 
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
-    }
 }

@@ -33,18 +33,6 @@ public class BootStrapData implements CommandLineRunner {
         File file = new File("C:\\Users\\nar_c\\Downloads\\products 1 1.json");
         try (InputStream is = new FileInputStream(file)) {
             List<Product> products = objectMapper.readValue(is, new TypeReference<>() {});
-//            for(Product product:products){
-//                System.out.println(product.getName());
-//
-//                System.out.println(product.getId());
-//                System.out.println(product.getFullDescription());
-//                System.out.println(product.getImages());
-//                System.out.println(product.getPrice());
-//                System.out.println(product.getShortDescription());
-//                System.out.println(product.getTechnicalSpecifications());
-//
-//                productRepository.save(product);
-//            }
             productRepository.saveAll(products);
         }catch (TransactionSystemException e){
             Throwable cause = e.getRootCause();

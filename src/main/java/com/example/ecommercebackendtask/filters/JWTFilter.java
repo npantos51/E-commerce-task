@@ -44,9 +44,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
             try{
                 Long userId = jwtUtil.extractId(jwt);
-                if(userId == null){
-                    return;
-                }
+
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userId, null, List.of());
                 SecurityContextHolder.getContext().setAuthentication(token);
 
