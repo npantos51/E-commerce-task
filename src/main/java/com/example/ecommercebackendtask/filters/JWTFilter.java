@@ -31,11 +31,11 @@ public class JWTFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
 
-        String path = request.getRequestURI();
-        if(path.startsWith("/api/auth") || path.startsWith("/swagger-ui")){
-            filterChain.doFilter(request, response);
-            return;
-        }
+//        String path = request.getRequestURI();
+//        if(path.startsWith("/api/auth") || path.startsWith("/swagger-ui")){
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
         String authHeader = request.getHeader("Authorization");
         String jwt = null;
 
@@ -53,23 +53,11 @@ public class JWTFilter extends OncePerRequestFilter {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            filterChain.doFilter(request, response);
-        }
 
-//        if (username != null) {
-//
-//            UserDetails userDetails = this.userService.loadUserByUsername(username);
-//
-//            if (jwtUtil.validateToken(jwt, userDetails)) {
-//
-//                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-//                        userDetails, null, userDetails.getAuthorities());
-//                usernamePasswordAuthenticationToken
-//                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-//            }
-//        }
-//        filterChain.doFilter(request, response);
+        }
+        filterChain.doFilter(request, response);
+
+
 
     }
 }

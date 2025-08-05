@@ -41,6 +41,7 @@ public class UserService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setRole(Role.USER);
+        user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         //set up the cart
