@@ -1,0 +1,77 @@
+package com.example.ecommercebackendtask.bootstrap;
+
+import com.example.ecommercebackendtask.model.Cart;
+import com.example.ecommercebackendtask.model.Product;
+import com.example.ecommercebackendtask.model.Role;
+import com.example.ecommercebackendtask.model.User;
+import com.example.ecommercebackendtask.repository.CartRepository;
+import com.example.ecommercebackendtask.repository.ProductRepository;
+import com.example.ecommercebackendtask.services.UserService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.TransactionSystemException;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.List;
+
+@Component
+@RequiredArgsConstructor
+public class BootStrapData implements CommandLineRunner {
+
+    private final UserService userService;
+    private final ProductRepository productRepository;
+    private final CartRepository cartRepository;
+    private final ObjectMapper objectMapper;
+
+    @Override
+    public void run(String... args) throws Exception {
+        File file = new File("C:\\Users\\nar_c\\Downloads\\products 1 1.json");
+        try (InputStream is = new FileInputStream(file)) {
+            List<Product> products = objectMapper.readValue(is, new TypeReference<>() {});
+//            for(Product product:products){
+//                System.out.println(product.getName());
+//
+//                System.out.println(product.getId());
+//                System.out.println(product.getFullDescription());
+//                System.out.println(product.getImages());
+//                System.out.println(product.getPrice());
+//                System.out.println(product.getShortDescription());
+//                System.out.println(product.getTechnicalSpecifications());
+//
+//                productRepository.save(product);
+//            }
+            productRepository.saveAll(products);
+        }catch (TransactionSystemException e){
+            Throwable cause = e.getRootCause();
+            throw new RuntimeException("Transaction failed: " + (cause != null ? cause.getMessage() : "Unknown cause"), e);
+        }
+
+        User user1 = new User();
+        user1.setUsername("npantos");
+        Cart cart1 = new Cart();
+        cartRepository.save(cart1);
+        cart1.setUser(user1);
+        user1.setCart(cart1);
+        user1.setEmail("npantos@yahoo.com");
+        user1.setPassword("123");
+        user1.setRole(Role.ADMIN);
+
+        User user2 = new User();
+        user2.setUsername("marko");
+        Cart cart2 = new Cart();
+        cartRepository.save(cart2);
+        cart2.setUser(user2);
+        user2.setCart(cart2);
+        user2.setEmail("marko@yahoo.com");
+        user2.setPassword("321");
+        user2.setRole(Role.USER);
+
+        userService.newUser(user1);
+        userService.newUser(user2);
+    }
+}

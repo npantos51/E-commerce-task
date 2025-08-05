@@ -11,7 +11,6 @@ import org.hibernate.annotations.ManyToAny;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-@Table(name = "items", schema = "shop")
 public class Item {
 
     @Id

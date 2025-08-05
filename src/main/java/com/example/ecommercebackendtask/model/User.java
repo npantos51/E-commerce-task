@@ -12,7 +12,6 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@Table(name = "users", schema = "shop")
 public class User {
 
     @Id
@@ -29,7 +28,6 @@ public class User {
     private String email;
 
     @NotNull(message = "password field cannot be NULL")
-    @Size(max = 50, message = "The input is too long")
     private String password;
 
     @Enumerated(EnumType.STRING)
