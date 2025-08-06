@@ -6,6 +6,7 @@ import com.example.ecommercebackendtask.model.Role;
 import com.example.ecommercebackendtask.model.User;
 import com.example.ecommercebackendtask.repository.CartRepository;
 import com.example.ecommercebackendtask.repository.ProductRepository;
+import com.example.ecommercebackendtask.requests.RegisterRequest;
 import com.example.ecommercebackendtask.services.UserService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,6 +40,14 @@ public class BootStrapData implements CommandLineRunner {
             throw new RuntimeException("Transaction failed: " + (cause != null ? cause.getMessage() : "Unknown cause"), e);
         }
 
+//        RegisterRequest req1 = new RegisterRequest("npantos", "123");
+//        RegisterRequest req2 = new RegisterRequest("marko", "321");
+//        req1.setEmail("npantos@yahoo.com");
+//        req2.setEmail("marko@yahoo.com");
+//
+//        userService.register(req1);
+//        userService.register(req2);
+//
         User user1 = new User();
         user1.setUsername("npantos");
         Cart cart1 = new Cart();

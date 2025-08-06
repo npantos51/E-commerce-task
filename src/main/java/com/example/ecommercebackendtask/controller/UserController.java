@@ -38,5 +38,15 @@ public class UserController {
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<?> updateUserToAdmin(@PathVariable Long id, @AuthenticationPrincipal Long requestId){
+        User user = userService.getUserById(requestId).get();
+        if(user.getRole() != Role.ADMIN){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        userService.updateUserToAdmin(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 

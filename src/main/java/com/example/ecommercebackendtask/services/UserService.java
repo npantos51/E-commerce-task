@@ -92,6 +92,14 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void updateUserToAdmin(Long id){
+        User user = getUserById(id).get();
+        if(user.getRole() != Role.ADMIN){
+            user.setRole(Role.ADMIN);
+            userRepository.save(user);
+        }
+    }
+
     public User getUserByEmail(String email) {
 
         return userRepository.findByEmail(email);
