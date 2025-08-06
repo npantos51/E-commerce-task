@@ -16,13 +16,6 @@ public class JWTUtil {
 
     private final String SECRET_KEY = "MY JWT SECRET";
 
-//    public String extractUsername(String token) {
-//        return extractAllClaims(token).getSubject();
-//    }
-
-//    public boolean isTokenExpired(String token){
-//        return extractAllClaims(token).getExpiration().before(new Date());
-//    }
 
     public String generateToken(User user){
         Map<String, Object> claims = new HashMap<>();
@@ -33,9 +26,6 @@ public class JWTUtil {
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
     }
 
-//    public boolean validateToken(String token, UserDetails user) {
-//        return (user.getUsername().equals(extractUsername(token)) && !isTokenExpired(token));
-//    }
     public Long extractId(String token){
         return Long.parseLong(Jwts.parser()
                 .setSigningKey(SECRET_KEY)

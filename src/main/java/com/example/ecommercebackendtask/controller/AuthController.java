@@ -38,18 +38,4 @@ public class AuthController {
         return ResponseEntity.ok(userService.login(request));
     }
 
-
-
-
-//
-//    @PostMapping(value = "/login",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> login (@RequestBody LoginRequest loginRequest) {
-//        try {
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseEntity.status(401).build();
-//        }
-//        return ResponseEntity.ok(new LoginResponse(jwtUtil.generateToken(userService.loadUserByUsername(loginRequest.getUsername()).), userService.getPermissionsForUser(loginRequest.getEmail())));
-//    }
 }
