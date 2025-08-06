@@ -8,6 +8,7 @@ import com.example.ecommercebackendtask.requests.RegisterRequest;
 import com.example.ecommercebackendtask.responses.AuthResponse;
 import com.example.ecommercebackendtask.services.UserService;
 import io.swagger.models.Response;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,11 +27,13 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/register")
+    @Operation(description = "registers a new user with the user role")
     public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(request));
     }
 
     @PostMapping("/login")
+    @Operation(description = "simple log in with username and password")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request){
         return ResponseEntity.ok(userService.login(request));
     }

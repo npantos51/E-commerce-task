@@ -33,11 +33,14 @@ public class CartService {
             user.setCart(cart);
         }
 
+        //creating a new item, saving it in the repository and adding it to the cart
         Item item = new Item();
         item.setCart(cart);
         item.setProduct(product);
         item.setQuantity(request.getQuantity());
+        itemRepository.save(item);
         cart.getItems().add(item);
+
         cartRepository.save(cart);
     }
 

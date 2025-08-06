@@ -3,6 +3,7 @@ package com.example.ecommercebackendtask.controller;
 import com.example.ecommercebackendtask.model.Product;
 import com.example.ecommercebackendtask.services.ProductService;
 import io.swagger.models.Response;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,12 +22,14 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
+    @GetMapping//
+    @Operation(description = "lists all available products")
     public ResponseEntity<Page<Product>> listAll(Pageable pageable){
         return ResponseEntity.ok(productService.getAll(pageable));
     }
 
     @GetMapping("/{id}")
+    @Operation(description = "views a single product")
     public ResponseEntity<Product> getProduct(@PathVariable Long id){
         return ResponseEntity.ok(productService.get(id));
     }

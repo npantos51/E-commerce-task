@@ -1,6 +1,7 @@
 package com.example.ecommercebackendtask.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ManyToAny;
@@ -17,6 +18,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     private Cart cart;
 
