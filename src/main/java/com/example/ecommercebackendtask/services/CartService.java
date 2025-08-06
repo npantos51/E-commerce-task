@@ -10,7 +10,9 @@ import com.example.ecommercebackendtask.repository.ProductRepository;
 import com.example.ecommercebackendtask.repository.UserRepository;
 import com.example.ecommercebackendtask.requests.ItemRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.file.AccessDeniedException;
 
@@ -24,6 +26,7 @@ public class CartService {
     private final ItemRepository itemRepository;
 
     public void addItemToCart(Long userId, ItemRequest request){
+        //getting the car of the current user
         User user = userRepository.findById(userId).get();
         Product product = productRepository.findById(request.getId()).get();
         Cart cart = user.getCart();
@@ -56,7 +59,7 @@ public class CartService {
     public void removeItemFromCart(Long userId, Long itemId){
         Item item = itemRepository.findById(itemId).get();
         if(!item.getCart().getUser().getId().equals(userId)){
-            return;
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This item does not belong to your cart.");
         }
         itemRepository.delete(item);
     }

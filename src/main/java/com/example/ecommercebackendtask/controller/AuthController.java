@@ -19,7 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -27,7 +27,7 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/register")
-    @Operation(description = "registers a new user with the user role")
+    @Operation(description = "registers a new user with the user role, with the provided username and password in the request")
     public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(request));
     }

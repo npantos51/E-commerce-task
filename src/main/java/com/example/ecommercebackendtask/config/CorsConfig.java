@@ -20,7 +20,8 @@ public class CorsConfig {
 //        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
 //        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 //        config.setAllowCredentials(true);
-//        org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.
 //        source.registerCorsConfiguration("/**", config);
 //        return source;
 //    }

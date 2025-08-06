@@ -36,8 +36,6 @@ public class Product {
     @Size(max = 2000, message = "The input is too long")
     private String fullDescription;
 
-//    @Convert(converter = JsonReaderClass.class)
-//    @Column(columnDefinition = "JSON CHARACTER SET utf8mb4")
     @ElementCollection
     private List<String> images;
 

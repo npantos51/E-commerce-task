@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -22,14 +22,14 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping//
+    @GetMapping
     @Operation(description = "lists all available products")
     public ResponseEntity<Page<Product>> listAll(Pageable pageable){
         return ResponseEntity.ok(productService.getAll(pageable));
     }
 
     @GetMapping("/{id}")
-    @Operation(description = "views a single product")
+    @Operation(description = "views a single product based on the provided id")
     public ResponseEntity<Product> getProduct(@PathVariable Long id){
         return ResponseEntity.ok(productService.get(id));
     }

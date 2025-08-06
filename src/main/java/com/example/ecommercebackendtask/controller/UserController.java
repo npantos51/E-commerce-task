@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    @Operation(description = "deletes a user if the current user is an admin")
+    @Operation(description = "based on the provided id, deletes the user if the current user is an admin")
     public ResponseEntity<?> deleteUser(@PathVariable Long id, @AuthenticationPrincipal Long requestId){
         User user = userService.getUserById(requestId).get();
         if(user.getRole() != Role.ADMIN){
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    @Operation(description = "upgrades a user to admin if the current user is an admin")
+    @Operation(description = "if the current user is an admin, upgrades a user to the admin role based on the provided user id")
     public ResponseEntity<?> updateUserToAdmin(@PathVariable Long id, @AuthenticationPrincipal Long requestId){
         User user = userService.getUserById(requestId).get();
         if(user.getRole() != Role.ADMIN){

@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/api/carts")
 public class CartController {
@@ -24,7 +24,7 @@ public class CartController {
 
     }
     @PostMapping("/add")
-    @Operation(description = "adds the passed amount of a product as an item to the current user's cart")
+    @Operation(description = "adds the requested amount of a product identified by an id as an item to the current user's cart")
     public ResponseEntity<?> addToCart(@RequestBody ItemRequest request, @AuthenticationPrincipal Long userId){
         cartService.addItemToCart(userId, request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -41,7 +41,7 @@ public class CartController {
         return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/item/{id}")
-    @Operation(description = "removes an item from the user's cart")
+    @Operation(description = "removes an item based on the provided id from the user's cart")
     public ResponseEntity<?> removeItem(@PathVariable Long id, @AuthenticationPrincipal Long userId){
         cartService.removeItemFromCart(userId, id);
         return ResponseEntity.noContent().build();
